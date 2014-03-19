@@ -40,7 +40,7 @@ app.js:
 	
 	...
 	
-	app.use(i18n.init);	// should be used bofore the router
+	app.use(i18n.init);	// should be used before the router
 	app.use(app.router);
 
 locales/ko.json:
