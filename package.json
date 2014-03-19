@@ -1,0 +1,31 @@
+{
+  "name": "hangul-postposition",
+  "description": "Translate proper Hangul postpositions for the Korean language.",
+  "keywords": [
+    "hangul",
+    "korean",
+    "postposition"
+  ],
+  "homepage": "http://github.com/peecky/hangul-postposition",
+  "author": "Kim Yungu",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/peecky/hangul-postposition"
+  },
+  "main": "hangul-postposition.js",
+  "version": "1.0.0",
+  "engines": [
+    "node >= 0.8.0"
+  ],
+  "bugs": {
+    "url": "https://github.com/peecky/hangul-postposition/issues"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "license": "BSD",
+  "directories": {
+    "test": "test"
+  },
+  "readmeFilename": "README.md"
+}
