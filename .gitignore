@@ -1,0 +1,9 @@
+*.DS_Store
+*.pyc
+*.csv
+_*.php
+_*.py
+*.o
+vagrant/.vagrant
+
+npm-debug.log
