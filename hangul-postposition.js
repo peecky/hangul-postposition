@@ -28,12 +28,12 @@ function isHangul(chr) {
 	return code >= 0xAC00 && code <= 0xD7A3;
 }
 
-function hasConsonant(chr) {
+function hasFinalConsonant(chr) {
 	var code = chr.charCodeAt(0);
 	return (code - 0xAC00) % 28 != 0
 }
 
-function hasConsonantRieul(chr) {
+function hasFinalConsonantRieul(chr) {
 	var code = chr.charCodeAt(0);
 	return (code - 0xAC00) % 28 == 8;
 }
@@ -63,9 +63,9 @@ function translate(msg, keywords, checkFunction) {
 exports.translatePostpositions = function(msg, properties) {
 	if (properties && properties.locale && properties.locale !== 'ko') return msg;
 
-	msg = translate(msg, keywords1, hasConsonant);
+	msg = translate(msg, keywords1, hasFinalConsonant);
 	msg = translate(msg, keywords2, function(chr) {
-		return hasConsonant(chr) && !hasConsonantRieul(chr);
+		return hasFinalConsonant(chr) && !hasFinalConsonantRieul(chr);
 	});
 	return msg;
 };
