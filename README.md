@@ -23,7 +23,7 @@ For examples,
 	var hanp = require('hangul-postposition');
 	console.log(hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
 
-See more examples on test/test.js
+See more examples on [test/test.js](https://github.com/peecky/hangul-postposition/blob/master/test/test.js)
 
 ## With express and jade
 Require the post translate option of i18n. See [https://github.com/peecky/i18n-node](https://github.com/peecky/i18n-node)
@@ -55,6 +55,6 @@ views/eat.jade:
 	- var food = __('banana')
 	p= __('I ate %s.', food)
 
-This becomes:
+These become:
 
 	<p>나는 바나나를 먹었다.</p>
