@@ -34,22 +34,26 @@ For examples,
 
 See more examples on [test/test.js](https://github.com/peecky/hangul-postposition/blob/master/test/test.js)
 
-## With express and jade
-Require the post translate option of i18n. See [https://github.com/peecky/i18n-node](https://github.com/peecky/i18n-node)
+## With express and i18n
+You can use [i18n](https://github.com/mashpie/i18n-node) or [i18n-2](https://github.com/jeresig/i18n-node-2).
 
 app.js:
 
+	var hanp = require('hangul-postposition');
 	var i18n = require('i18n');
 	i18n.configure({
 		locales: ['en', 'ko'],
 		defaultLocale: 'en',
-		directory: __dirname + '/locales',
-		postTranslate: require('hangul-postposition').translatePostpositions
+		directory: __dirname + '/locales'
 	});
 	
 	...
 	
 	app.use(i18n.init);	// should be used before the router
+	hanp.expressBind(app);
+	
+	...
+	
 	app.use(app.router);
 
 locales/ko.json:
@@ -67,3 +71,5 @@ views/eat.jade:
 These become:
 
 	<p>나는 바나나를 먹었다.</p>
+
+If you use [i18n-2](https://github.com/jeresig/i18n-node-2), call the hanp.expressBind() function after calling the [I18n.expressBind()](https://github.com/jeresig/i18n-node-2#i18nexpressbindapp-options) function.

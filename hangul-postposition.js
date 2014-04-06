@@ -71,7 +71,7 @@ function translate(msg, keywords, checkFunction) {
 	return translatedMsg;
 }
 
-exports.translatePostpositions = function(msg, properties) {
+var translatePostpositions = exports.translatePostpositions = function(msg, properties) {
 	if (properties && properties.locale && properties.locale !== 'ko') return msg;
 
 	msg = translate(msg, keywords1, hasFinalConsonant);
@@ -87,4 +87,25 @@ exports.options = function(options) {
 			keywords1 = options.halfTranslate ? keywords1Half : keywords1Full;
 		}
 	}
+};
+
+exports.expressBind = function(app) {
+	app.use(function(req, res, next) {
+		// override __() and __n() which come from i18n or i18n-2
+		if (res.locals) {
+			if (typeof res.locals.__ === 'function') {
+				res.locals._old__ = res.locals.__;
+				res.locals.__ = function() {
+					return translatePostpositions(res.locals._old__.apply(this, arguments));
+				};
+			}
+			if (typeof res.locals.__n === 'function') {
+				res.locals._old__n = res.locals.__n;
+				res.locals.__n = function() {
+					return translatePostpositions(res.locals._old__n.apply(this, arguments));
+				};
+			}
+		}
+		next();
+	});
 };
