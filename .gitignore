@@ -7,3 +7,4 @@ _*.py
 vagrant/.vagrant
 
 npm-debug.log
+node_modules

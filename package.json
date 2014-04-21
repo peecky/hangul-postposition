@@ -13,7 +13,7 @@
     "url": "git://github.com/peecky/hangul-postposition"
   },
   "main": "hangul-postposition.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "engines": [
     "node >= 0.8.0"
   ],
@@ -21,11 +21,14 @@
     "url": "https://github.com/peecky/hangul-postposition/issues"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "./node_modules/.bin/jshint test/ hangul-postposition.js && node test/test.js"
   },
   "license": "BSD",
   "directories": {
     "test": "test"
+  },
+  "devDependencies": {
+    "jshint": "*"
   },
   "readmeFilename": "README.md"
 }
