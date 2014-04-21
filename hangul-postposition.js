@@ -41,12 +41,12 @@ function isHangul(chr) {
 
 function hasFinalConsonant(chr) {
 	var code = chr.charCodeAt(0);
-	return (code - 0xAC00) % 28 != 0
+	return (code - 0xAC00) % 28 !== 0;
 }
 
 function hasFinalConsonantRieul(chr) {
 	var code = chr.charCodeAt(0);
-	return (code - 0xAC00) % 28 == 8;
+	return (code - 0xAC00) % 28 === 8;
 }
 
 function translate(msg, keywords, checkFunction) {
