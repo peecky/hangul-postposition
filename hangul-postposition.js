@@ -74,6 +74,16 @@
 		return translatedMsg;
 	}
 
+	var exports = {};
+	if (typeof window === 'object') {
+		// web browser
+		window.hanp = exports;
+	}
+	else if (typeof module === 'object' && typeof module.exports === 'object') {
+		// node.js
+		module.exports = exports;
+	}
+
 	var translatePostpositions = exports.translatePostpositions = function(msg, properties) {
 		if (properties && properties.locale && properties.locale !== 'ko') return msg;
 

@@ -1,5 +1,7 @@
 # Hangul Postposition
 
+(This library is for both node.js and Web Browsers.)
+
 Translate proper Hangul postpositions for the Korean language.
 
 * `'을(를)'` to `'을'` or `'를'`
@@ -29,8 +31,18 @@ For examples,
 	npm install hangul-postposition
 
 ## Simple Example
+
+for Node.js:
+
 	var hanp = require('hangul-postposition');
 	console.log(hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
+
+for Web Browsers:
+
+	<script src="hangul-postposition.js"></script>
+	<script>
+	alert(hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
+	</script>
 
 See more examples on [test/test.js](https://github.com/peecky/hangul-postposition/blob/master/test/test.js)
 

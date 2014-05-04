@@ -1,10 +1,21 @@
-#!/usr/bin/env node
-
 // encoding: utf8
 
-var assert = require('assert');
+var assert, hanp;
 
-var hanp = require("../hangul-postposition");
+if (typeof window === 'object') {
+	// web browser
+	assert = {
+		strictEqual: function(arg1, arg2) {
+			if (arg1 !== arg2) throw new Error('Test fail!');
+		}
+	};
+	hanp = window.hanp;
+}
+else if (typeof require === 'function') {
+	// node.js
+	assert = require('assert');
+	hanp = require("../hangul-postposition");
+}
 
 //hanp.options({halfTranslate: true});
 assert.strictEqual(hanp.translatePostpositions(''), '');	// empty string
