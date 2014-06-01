@@ -1,3 +1,10 @@
+/**
+ * @link	https://github.com/peecky/hangul-postposition
+ * @license	http://opensource.org/licenses/MIT
+ *
+ * @version	1.4.0
+ */
+
 // encoding:utf8
 
 (function() {
@@ -18,7 +25,7 @@
 		'을(를)': ['을', '를'],
 		'를(을)': ['을', '를'],
 		'이(가)': ['이', '가'],
-	//	'가(이)': ['이', '가'],
+//		'가(이)': ['이', '가'],
 		'은(는)': ['은', '는'],
 		'는(은)': ['은', '는'],
 		'과(와)': ['과', '와'],
