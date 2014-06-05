@@ -25,6 +25,7 @@ assert.strictEqual(hanp.translatePostpositions('사람과(와) 고양이과(와)
 assert.strictEqual(hanp.translatePostpositions('배이(가) 고파요. 밥이(가) 먹고 싶어요.'), '배가 고파요. 밥이 먹고 싶어요.');
 assert.strictEqual(hanp.translatePostpositions('둘리아(야)! 희동아(야)!'), '둘리야! 희동아!');
 assert.strictEqual(hanp.translatePostpositions('종이이어(여)서 찢어졌다. 비닐이어(여)서 늘어났다.'), '종이여서 찢어졌다. 비닐이어서 늘어났다.');
+assert.strictEqual(hanp.translatePostpositions('저 사람 김태균이에(예)요? 아니요. 하나카나이에(예)요.'), '저 사람 김태균이에요? 아니요. 하나카나예요.');
 assert.strictEqual(hanp.translatePostpositions('그는 곰이었(였)으며, 동시에 호랑이이었(였)다.'), '그는 곰이었으며, 동시에 호랑이였다.');
 assert.strictEqual(hanp.translatePostpositions('불(이)야! 소방차(이)야!'), '불이야! 소방차야!');
 assert.strictEqual(hanp.translatePostpositions('비(이)다. 아니다. 눈(이)다.'), '비다. 아니다. 눈이다.');
@@ -45,6 +46,8 @@ assert.strictEqual(hanp.translatePostpositions('둘리아(야)! 희동아(야)!'
 assert.strictEqual(hanp.translatePostpositions('둘리야(아)! 희동야(아)!'), '둘리야! 희동아!');
 assert.strictEqual(hanp.translatePostpositions('종이이어(여)서 찢어졌다. 비닐이어(여)서 늘어났다.'), '종이여서 찢어졌다. 비닐이어서 늘어났다.');
 assert.strictEqual(hanp.translatePostpositions('종이여(이어)서 찢어졌다. 비닐여(이어)서 늘어났다.'), '종이여서 찢어졌다. 비닐이어서 늘어났다.');
+assert.strictEqual(hanp.translatePostpositions('저 사람 김태균이에(예)요? 아니요. 하나카나이에(예)요.'), '저 사람 김태균이에요? 아니요. 하나카나예요.');
+assert.strictEqual(hanp.translatePostpositions('저 사람 김태균예(이에)요? 아니요. 하나카나예(이에)요.'), '저 사람 김태균이에요? 아니요. 하나카나예요.');
 assert.strictEqual(hanp.translatePostpositions('그는 곰이었(였)으며, 동시에 호랑이이었(였)다.'), '그는 곰이었으며, 동시에 호랑이였다.');
 assert.strictEqual(hanp.translatePostpositions('그는 곰였(이었)으며, 동시에 호랑이였(이었)다.'), '그는 곰이었으며, 동시에 호랑이였다.');
 assert.strictEqual(hanp.translatePostpositions('불(이)야! 소방차(이)야!'), '불이야! 소방차야!');
