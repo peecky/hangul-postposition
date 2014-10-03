@@ -31,6 +31,11 @@ assert.strictEqual(hanp.translatePostpositions('불(이)야! 소방차(이)야!'
 assert.strictEqual(hanp.translatePostpositions('비(이)다. 아니다. 눈(이)다.'), '비다. 아니다. 눈이다.');
 assert.strictEqual(hanp.translatePostpositions('서울(으)로 안 가니?'), '서울로 안 가니?');
 assert.strictEqual(hanp.translatePostpositions('기차(으)로 부산(으)로 갈 것이다.'), '기차로 부산으로 갈 것이다.');
+assert.strictEqual(hanp.translatePostpositions('4과(와) 7을(를) 더하면 11(이)다.'), '4와 7을 더하면 11이다.');
+
+assert.strictEqual(hanp.translatePostpositions('1(으)로 1을(를) 7(으)로 7을(를) 8(으)로 8을(를)'), '1로 1을 7로 7을 8로 8을');
+assert.strictEqual(hanp.translatePostpositions('3(으)로 3을(를) 6(으)로 6을(를) 0(으)로 0을(를)'), '3으로 3을 6으로 6을 0으로 0을');
+assert.strictEqual(hanp.translatePostpositions('2(으)로 2을(를) 4(으)로 4을(를) 5(으)로 5을(를) 9(으)로 9을(를)'), '2로 2를 4로 4를 5로 5를 9로 9를');
 
 hanp.options({halfTranslate: false});
 assert.strictEqual(hanp.translatePostpositions(''), '');	// empty string
@@ -54,5 +59,7 @@ assert.strictEqual(hanp.translatePostpositions('불(이)야! 소방차(이)야!'
 assert.strictEqual(hanp.translatePostpositions('비(이)다. 아니다. 눈(이)다.'), '비다. 아니다. 눈이다.');
 assert.strictEqual(hanp.translatePostpositions('서울(으)로 안 가니?'), '서울로 안 가니?');
 assert.strictEqual(hanp.translatePostpositions('기차(으)로 부산(으)로 갈 것이다.'), '기차로 부산으로 갈 것이다.');
+assert.strictEqual(hanp.translatePostpositions('4과(와) 7을(를) 더하면 11(이)다.'), '4와 7을 더하면 11이다.');
+assert.strictEqual(hanp.translatePostpositions('4와(과) 7를(을) 더하면 11(이)다.'), '4와 7을 더하면 11이다.');
 
 console.log('Test completed. No errors.');

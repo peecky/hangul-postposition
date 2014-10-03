@@ -52,14 +52,21 @@
 		return code >= 0xAC00 && code <= 0xD7A3;
 	}
 
+	function isTranslatable(chr) {
+		var code = chr.charCodeAt(0);
+		return (code >= 0xAC00 && code <= 0xD7A3) || (code >= 48 && code <= 57);
+	}
+
 	function hasFinalConsonant(chr) {
 		var code = chr.charCodeAt(0);
-		return (code - 0xAC00) % 28 !== 0;
+		return (isHangul(chr) && ((code - 0xAC00) % 28 !== 0)) ||
+			code === 48 || code === 49 || code === 51 || code === 54 || code === 55 || code === 56;
 	}
 
 	function hasFinalConsonantRieul(chr) {
 		var code = chr.charCodeAt(0);
-		return (code - 0xAC00) % 28 === 8;
+		return (isHangul(chr) && ((code - 0xAC00) % 28 === 8)) ||
+			code === 49 || code === 55 || code === 56;
 	}
 
 	function translate(msg, keywords, checkFunction) {
@@ -74,7 +81,7 @@
 				translatedMsg += msgParts[i];
 				var lastChr = msgParts[i].charAt(msgParts[i].length-1);
 				var postposition;
-				if (isHangul(lastChr))
+				if (isTranslatable(lastChr))
 					postposition = checkFunction(lastChr) ? keywords[keyword][0] : keywords[keyword][1];
 				else postposition = keyword;
 				translatedMsg += postposition;

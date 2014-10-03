@@ -28,6 +28,7 @@ For examples,
 * `'비(이)다. 아니다. 눈(이)다.'` is translated to `'비다. 아니다. 눈이다.'`.
 * `'서울(으)로 안 가니?'` is translated to `'서울로 안 가니?'`
 * `'기차(으)로 부산(으)로 갈 것이다.'` is translated to `'기차로 부산으로 갈 것이다.'`
+* `'4과(와) 7을(를) 더하면 11(이)다.'` is translated to `'4와 7을 더하면 11이다.'`
 
 ## Install
 	npm install hangul-postposition
