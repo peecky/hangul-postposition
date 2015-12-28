@@ -2,7 +2,7 @@
  * @link	https://github.com/peecky/hangul-postposition
  * @license	http://opensource.org/licenses/MIT
  *
- * @version	1.5.1
+ * @version	1.7.0
  */
 
 // encoding:utf8
@@ -47,6 +47,8 @@
 		'(으)로': ['으로', '로']
 	};
 
+    var forceTranslate = false;
+
 	function isHangul(chr) {
 		var code = chr.charCodeAt(0);
 		return code >= 0xAC00 && code <= 0xD7A3;
@@ -83,7 +85,7 @@
 				var postposition;
 				if (isTranslatable(lastChr))
 					postposition = checkFunction(lastChr) ? keywords[keyword][0] : keywords[keyword][1];
-				else postposition = keyword;
+				else postposition = forceTranslate ? keywords[keyword][0] : keyword;
 				translatedMsg += postposition;
 			}
 			translatedMsg += msgParts[i];
@@ -116,6 +118,7 @@
 			if (typeof options.halfTranslate !== 'undefined') {
 				keywords1 = options.halfTranslate ? keywords1Half : keywords1Full;
 			}
+            if (typeof options.forceTranslate !== 'undefined') forceTranslate = options.forceTranslate;
 		}
 	};
 

@@ -62,4 +62,9 @@ assert.strictEqual(hanp.translatePostpositions('기차(으)로 부산(으)로 �
 assert.strictEqual(hanp.translatePostpositions('4과(와) 7을(를) 더하면 11(이)다.'), '4와 7을 더하면 11이다.');
 assert.strictEqual(hanp.translatePostpositions('4와(과) 7를(을) 더하면 11(이)다.'), '4와 7을 더하면 11이다.');
 
+//hanp.options({ forceTranslate: false });
+assert.strictEqual(hanp.translatePostpositions('...은(는) ...(이)다.'), '...은(는) ...(이)다.');
+hanp.options({ forceTranslate: true });
+assert.strictEqual(hanp.translatePostpositions('...은(는) ...(이)다.'), '...은 ...이다.');
+
 console.log('Test completed. No errors.');

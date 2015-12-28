@@ -15,7 +15,7 @@
     "url": "git://github.com/peecky/hangul-postposition"
   },
   "main": "hangul-postposition.js",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "engines": [
     "node >= 0.8.0"
   ],

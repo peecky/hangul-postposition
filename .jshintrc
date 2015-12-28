@@ -1,0 +1,8 @@
+{
+	"browser": true,
+	"devel": true,
+	"node": true,
+	"loopfunc": true,
+	"undef": true,
+	"unused": "vars"
+}
