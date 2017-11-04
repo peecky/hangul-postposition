@@ -37,14 +37,14 @@ For examples,
 
 for Node.js:
 
-	var hanp = require('hangul-postposition');
-	console.log(hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
+	var Hanp = require('hangul-postposition');
+	console.log(Hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
 
 for Web Browsers:
 
 	<script src="hangul-postposition.js"></script>
 	<script>
-	alert(hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
+	alert(Hanp.translatePostpositions('사자은(는) 토끼을(를) 먹고 말은(는) 풀을(를) 먹는다.'));
 	</script>
 
 See more examples on [test/test.js](https://github.com/peecky/hangul-postposition/blob/master/test/test.js)
@@ -54,7 +54,8 @@ You can use [i18n](https://github.com/mashpie/i18n-node) or [i18n-2](https://git
 
 app.js:
 
-	var hanp = require('hangul-postposition');
+	var Hanp = require('hangul-postposition');
+	var hanp = new Hanp();
 	var i18n = require('i18n');
 	i18n.configure({
 		locales: ['en', 'ko'],

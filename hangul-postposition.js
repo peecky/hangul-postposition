@@ -2,7 +2,7 @@
  * @link	https://github.com/peecky/hangul-postposition
  * @license	http://opensource.org/licenses/MIT
  *
- * @version	1.7.0
+ * @version	2.0.0
  */
 
 // encoding:utf8
@@ -10,7 +10,6 @@
 (function() {
 	"use strict";
 
-	var keywords1;
 	var keywords1Half = {
 		'을(를)': ['을', '를'],
 		'이(가)': ['이', '가'],
@@ -41,13 +40,10 @@
 		'였(이었)': ['이었', '였'],
 		'(이)': ['이', '']
 	};
-	keywords1 = keywords1Half;
 
 	var keywords2 = {
 		'(으)로': ['으로', '로']
 	};
-
-    var forceTranslate = false;
 
 	function isHangul(chr) {
 		var code = chr.charCodeAt(0);
@@ -71,75 +67,85 @@
 			code === 49 || code === 55 || code === 56;
 	}
 
-	function translate(msg, keywords, checkFunction) {
-		var i, l;
+	function Hanp() {
+		this._keywords1 = keywords1Half;
+		this._forceTranslate = false;
+	}
+
+	Hanp.prototype._translate = function(msg, keywords, checkFunction) {
 		var translatedMsg = msg;
-		var keyword;
-		for (keyword in keywords) {
+		var keywordsKeys = Object.keys(keywords);
+		for (var i = 0; i < keywordsKeys.length; i++) {
+			var keyword = keywordsKeys[i];
 			var msgParts = translatedMsg.split(keyword);
 			if (msgParts.length < 2) continue;
 			translatedMsg = '';
-			for (i = 0, l = msgParts.length-1; i < l; i++) {
-				translatedMsg += msgParts[i];
-				var lastChr = msgParts[i].charAt(msgParts[i].length-1);
+			for (var j = 0, l = msgParts.length-1; j < l; j++) {
+				translatedMsg += msgParts[j];
+				var lastChr = msgParts[j].charAt(msgParts[j].length-1);
 				var postposition;
 				if (isTranslatable(lastChr))
 					postposition = checkFunction(lastChr) ? keywords[keyword][0] : keywords[keyword][1];
-				else postposition = forceTranslate ? keywords[keyword][0] : keyword;
+				else postposition = this._forceTranslate ? keywords[keyword][0] : keyword;
 				translatedMsg += postposition;
 			}
-			translatedMsg += msgParts[i];
+			translatedMsg += msgParts[j];
 		}
 		return translatedMsg;
-	}
+	};
 
-	var exports = {};
-	if (typeof window === 'object') {
-		// web browser
-		window.hanp = exports;
-	}
-	else if (typeof module === 'object' && typeof module.exports === 'object') {
-		// node.js
-		module.exports = exports;
-	}
-
-	var translatePostpositions = exports.translatePostpositions = function(msg, properties) {
+	Hanp.prototype.translatePostpositions = function(msg, properties) {
 		if (properties && properties.locale && properties.locale !== 'ko') return msg;
 
-		msg = translate(msg, keywords1, hasFinalConsonant);
-		msg = translate(msg, keywords2, function(chr) {
+		msg = this._translate(msg, this._keywords1, hasFinalConsonant);
+		msg = this._translate(msg, keywords2, function(chr) {
 			return hasFinalConsonant(chr) && !hasFinalConsonantRieul(chr);
 		});
 		return msg;
 	};
 
-	exports.options = function(options) {
+	Hanp.prototype.options = function(options) {
 		if (options) {
 			if (typeof options.halfTranslate !== 'undefined') {
-				keywords1 = options.halfTranslate ? keywords1Half : keywords1Full;
+				this._keywords1 = options.halfTranslate ? keywords1Half : keywords1Full;
 			}
-            if (typeof options.forceTranslate !== 'undefined') forceTranslate = options.forceTranslate;
+            if (typeof options.forceTranslate !== 'undefined') this._forceTranslate = options.forceTranslate;
 		}
 	};
 
-	exports.expressBind = function(app) {
+	Hanp.prototype.expressBind = function(app) {
+		var self = this;
 		app.use(function(req, res, next) {
 			// override __() and __n() which come from i18n or i18n-2
 			if (res.locals) {
 				if (typeof res.locals.__ === 'function') {
 					res.locals._old__ = res.locals.__;
 					res.locals.__ = function() {
-						return translatePostpositions(res.locals._old__.apply(this, arguments));
+						return self.translatePostpositions(res.locals._old__.apply(this, arguments));
 					};
 				}
 				if (typeof res.locals.__n === 'function') {
 					res.locals._old__n = res.locals.__n;
 					res.locals.__n = function() {
-						return translatePostpositions(res.locals._old__n.apply(this, arguments));
+						return self.translatePostpositions(res.locals._old__n.apply(this, arguments));
 					};
 				}
 			}
 			next();
 		});
 	};
+
+	var hanp = new Hanp();
+	Hanp.translatePostpositions = hanp.translatePostpositions.bind(hanp);
+	Hanp.options = hanp.options.bind(hanp);
+	Hanp.expressBind = hanp.expressBind.bind(hanp);
+	if (typeof window === 'object') {
+		// web browser
+		window.Hanp = Hanp;
+		window.hanp = hanp;
+	}
+	else if (typeof module === 'object' && typeof module.exports === 'object') {
+		// node.js
+		module.exports = Hanp;
+	}
 })();
